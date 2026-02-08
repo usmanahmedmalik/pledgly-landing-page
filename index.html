@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pledgly | Something Big is Coming</title>
+    <!-- Tailwind CSS v4 is currently in alpha/beta, using standard Tailwind Play CDN for best reliability in standalone HTML -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --font-outfit: 'Outfit', sans-serif;
+            --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-jakarta);
+            overflow-x: hidden;
+        }
+
+        .font-outfit {
+            font-family: var(--font-outfit);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+            filter: blur(80px);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body class="bg-[#030712] text-white">
+
+    <!-- Blobs -->
+    <div class="blob top-[-10%] left-[-10%]" style="animation: float 8s ease-in-out infinite;"></div>
+    <div class="blob bottom-[-10%] right-[-10%]"
+        style="animation: float 10s ease-in-out infinite; animation-delay: 2s;"></div>
+
+    <div class="min-h-screen flex flex-col items-center px-6">
+        <!-- Header -->
+        <nav class="w-full max-w-7xl flex justify-between items-center py-8">
+            <div class="flex items-center space-x-3">
+                <!-- Custom Unique Pledgly Logo -->
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+                    </div>
+                    <div
+                        class="relative w-12 h-12 bg-[#030712] border border-white/10 rounded-xl flex items-center justify-center">
+                        <svg viewBox="0 0 40 40" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 28C12 28 14 30 20 30C26 30 28 28 28 28" stroke="url(#logo_grad)"
+                                stroke-width="3" stroke-linecap="round" />
+                            <path d="M10 10V30" stroke="url(#logo_grad)" stroke-width="3" stroke-linecap="round" />
+                            <path d="M10 10H22C27.5228 10 32 14.4772 32 20C32 25.5228 27.5228 30 22 30H20"
+                                stroke="url(#logo_grad)" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <circle cx="21" cy="20" r="4" fill="white" class="animate-pulse" />
+                            <defs>
+                                <linearGradient id="logo_grad" x1="10" y1="10" x2="32" y2="30"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#6366f1" />
+                                    <stop offset="1" stop-color="#a855f7" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold font-outfit tracking-tighter leading-none">Pledgly</span>
+                    <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Next-Gen
+                        Giving</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-1 border border-white/10 glass rounded-full px-2 py-1">
+                <a href="#features"
+                    class="px-5 py-2 hover:bg-white/5 rounded-full transition-all text-sm font-medium">Platform</a>
+                <a href="#compliance"
+                    class="px-5 py-2 hover:bg-white/5 rounded-full transition-all text-sm font-medium">Security</a>
+                <a href="#about"
+                    class="px-5 py-2 hover:bg-white/5 rounded-full transition-all text-sm font-medium">Vision</a>
+                <!-- <a href="#join"
+                    class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-full transition-all text-sm font-semibold shadow-lg shadow-indigo-600/20">Early
+                    Access</a> -->
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="w-full max-w-5xl flex flex-col items-center text-center mt-20 md:mt-32">
+            <div
+                class="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-1.5 mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Phase 1 & 2 Core
+                    Complete</span>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-extrabold font-outfit leading-[1.1] mb-8">
+                The Future of <br> <span class="gradient-text">Philanthropy</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mb-12 leading-relaxed">
+                Pledgly is a revolutionary multi-tenant donation orchestration platform. We empower organizations with
+                enterprise-grade tools to manage memberships, automate pledges, and scale global impact flawlessly.
+            </p>
+
+            <!-- <div id="join"
+                class="w-full max-w-md flex flex-col md:flex-row gap-3 p-2 border border-white/10 glass rounded-2xl">
+                <input type="email" placeholder="Enter your work email"
+                    class="flex-1 bg-transparent px-4 py-3 outline-none text-white placeholder:text-slate-500 border border-transparent focus:border-indigo-500/30 rounded-xl transition-all">
+                <button
+                    class="bg-indigo-600 text-white font-bold px-8 py-3 rounded-xl hover:bg-indigo-500 transition-all whitespace-nowrap">
+                    Request Beta Access
+                </button>
+            </div>
+            <p class="text-sm text-slate-500 mt-4 italic">Architected for security. Focused on the mission.</p> -->
+        </main>
+
+        <!-- Features Teaser -->
+        <section id="features" class="w-full max-w-7xl mt-48 mb-32">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-outfit mb-4">Core Platform Capabilities</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">A comprehensive ecosystem designed to eliminate
+                    administrative friction and maximize your funding potential.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Multi-Tenancy -->
+                <div
+                    class="glass p-8 rounded-3xl group hover:border-indigo-500/50 transition-all border-l-4 border-l-indigo-500">
+                    <div
+                        class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Isolated Multi-Tenancy</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Enterprise-grade data isolation. Each organization
+                        operates in a secure, sandboxed environment with path-based unique URLs.</p>
+                </div>
+
+                <!-- Stripe Connect -->
+                <div
+                    class="glass p-8 rounded-3xl group hover:border-purple-500/50 transition-all border-l-4 border-l-purple-500">
+                    <div
+                        class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Direct Funding (Connect)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">No middlemen. Connect your Stripe account and
+                        receive donations directly with real-time settlement and direct charges.</p>
+                </div>
+
+                <!-- Recurring Pledges -->
+                <div
+                    class="glass p-8 rounded-3xl group hover:border-pink-500/50 transition-all border-l-4 border-l-pink-500">
+                    <div
+                        class="w-12 h-12 bg-pink-600/20 text-pink-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Automated Pledges</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Turn commitments into recurring revenue. Automated
+                        subscription logic for monthly, quarterly, or annual support programs.</p>
+                </div>
+
+                <!-- Compliance -->
+                <div
+                    class="glass p-8 rounded-3xl group hover:border-blue-500/50 transition-all border-l-4 border-l-blue-500">
+                    <div
+                        class="w-12 h-12 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ANBI & Tax Ready</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Automatic PDF generation for ANBI-compliant tax
+                        receipts. Perfect for European and Dutch regulatory requirements.</p>
+                </div>
+
+                <!-- Language -->
+                <div
+                    class="glass p-8 rounded-3xl group hover:border-orange-500/50 transition-all border-l-4 border-l-orange-500">
+                    <div
+                        class="w-12 h-12 bg-orange-600/20 text-orange-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Global Localization</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Speak your donors' language. Full native support
+                        for EN, NL, AR, FR, ES, and DE for truly global reach.</p>
+                </div>
+
+                <!-- Analytics -->
+                <div
+                    class="glass p-8 rounded-3xl group hover:border-green-500/50 transition-all border-l-4 border-l-green-500">
+                    <div
+                        class="w-12 h-12 bg-green-600/20 text-green-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real-time Insights</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Deep-dive analytics into donor behavior and
+                        financial health with automated platform-wide monitoring.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance & Security -->
+        <section id="compliance"
+            class="w-full max-w-7xl mb-32 py-20 px-10 glass rounded-[3rem] relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-20 bg-indigo-500/10 blur-[100px] rounded-full"></div>
+            <div class="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold font-outfit mb-6">GDPR Compliant. <br> Security First.
+                    </h2>
+                    <p class="text-slate-400 mb-8 leading-relaxed">
+                        Data privacy isn't a feature; it's our foundation. Pledgly is architected to exceed the most
+                        stringent global standards, ensuring donor trust and organizational integrity.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <span>Full GDPR Data Portability & Rights Control</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <span>End-to-End Encryption for Financial Metadata</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <span>SCA-Ready Payment Infrastructure</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center">
+                        <div class="text-3xl font-bold text-white mb-2 tracking-tighter">EU</div>
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Data Residency</div>
+                    </div>
+                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl text-center">
+                        <div class="text-3xl font-bold text-white mb-2 tracking-tighter">SCA</div>
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Payment Security
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white/10 border border-white/20 rounded-2xl text-center col-span-2">
+                        <div class="text-3xl font-bold text-indigo-400 mb-2 tracking-tighter tracking-widest">TLS 1.3
+                        </div>
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Transport Security
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Mission -->
+        <section id="about"
+            class="w-full max-w-4xl py-24 border-t border-white/10 flex flex-col items-center text-center">
+            <h2 class="text-4xl font-bold font-outfit mb-6">Our Mission</h2>
+            <p class="text-xl text-slate-300 italic mb-8">
+                "We believe that the technical complexity of modern donation systems shouldn't stand in the way of
+                global generosity."
+            </p>
+            <div class="flex items-center space-x-3 text-slate-500">
+                <span class="w-8 h-[1px] bg-slate-800"></span>
+                <span>The Pledgly Team</span>
+                <span class="w-8 h-[1px] bg-slate-800"></span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer
+            class="w-full border-t border-white/5 py-12 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+            <p>&copy; 2026 Pledgly. All rights reserved.</p>
+            <div class="flex space-x-6 mt-6 md:mt-0">
+                <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="mailto:hello@pledgly.com" class="hover:text-white transition-colors">Support</a>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>
