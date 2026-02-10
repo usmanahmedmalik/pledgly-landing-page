@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pledgly Logo Social Media Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            padding: 2rem;
+            font-family: sans-serif;
+        }
+
+        .preview-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-3xl font-bold mb-8 text-gray-800">Pledgly Logo Assets</h1>
+
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Source Files</h2>
+        <div class="grid-preview">
+            <div class="preview-card flex flex-col items-center">
+                <h3 class="font-medium mb-4">Dark Background (logo_dark.svg)</h3>
+                <img src="logo_dark.svg" width="150" height="150" class="border rounded">
+                <p class="text-sm text-gray-500 mt-2">Best for dark mode / generic use</p>
+                <a href="logo_dark.svg" download
+                    class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded text-sm">Download SVG</a>
+            </div>
+            <div class="preview-card flex flex-col items-center">
+                <h3 class="font-medium mb-4">Light Background (logo_light.svg)</h3>
+                <img src="logo_light.svg" width="150" height="150" class="border rounded">
+                <p class="text-sm text-gray-500 mt-2">Best for light contexts</p>
+                <a href="logo_light.svg" download
+                    class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded text-sm">Download SVG</a>
+            </div>
+            <div class="preview-card flex flex-col items-center">
+                <h3 class="font-medium mb-4">Transparent (logo_transparent.svg)</h3>
+                <img src="logo_transparent.svg" width="150" height="150"
+                    class="border rounded bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAH0lEQVQ4T2NkYGA4A8JQMAwD6Ojoo546CkbBKBgFAwAAuUWX6X0x5+AAAAAASUVORK5CYII=')]">
+                <p class="text-sm text-gray-500 mt-2">Transparent background</p>
+                <a href="logo_transparent.svg" download
+                    class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded text-sm">Download SVG</a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Platform Previews</h2>
+        <div class="grid-preview">
+            <!-- Instagram -->
+            <div class="preview-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-medium text-pink-600">Instagram / TikTok</h3>
+                    <span class="text-xs bg-gray-100 px-2 py-1 rounded">Profile: 110x110 / 320x320</span>
+                </div>
+                <div class="flex justify-center p-4 bg-gray-50 rounded">
+                    <img src="logo_dark.svg" class="w-24 h-24 rounded-full border-2 border-white shadow-sm">
+                </div>
+            </div>
+
+            <!-- Twitter/X -->
+            <div class="preview-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-medium text-blue-400">Twitter / X</h3>
+                    <span class="text-xs bg-gray-100 px-2 py-1 rounded">Profile: 400x400</span>
+                </div>
+                <div class="flex justify-center p-4 bg-gray-50 rounded">
+                    <img src="logo_dark.svg" class="w-32 h-32 rounded-full border-4 border-white shadow-sm">
+                </div>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="preview-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-medium text-blue-700">LinkedIn</h3>
+                    <span class="text-xs bg-gray-100 px-2 py-1 rounded">Profile: 400x400</span>
+                </div>
+                <div class="flex justify-center p-4 bg-gray-50 rounded">
+                    <img src="logo_light.svg" class="w-32 h-32 rounded bg-white shadow-sm">
+                </div>
+            </div>
+
+            <!-- YouTube -->
+            <div class="preview-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-medium text-red-600">YouTube</h3>
+                    <span class="text-xs bg-gray-100 px-2 py-1 rounded">Profile: 800x800</span>
+                </div>
+                <div class="flex justify-center p-4 bg-gray-50 rounded">
+                    <img src="logo_dark.svg" class="w-32 h-32 rounded-full border shadow-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
