@@ -197,6 +197,7 @@ const translations = {
 document.addEventListener('alpine:init', () => {
     Alpine.data('app', () => ({
         currentLang: 'nl',
+        currentTheme: localStorage.getItem('pledgly_theme') || 'light',
         translations: translations,
 
         init() {
@@ -204,13 +205,32 @@ document.addEventListener('alpine:init', () => {
             if (savedLang && ['en', 'nl', 'de', 'ar'].includes(savedLang)) {
                 this.currentLang = savedLang;
             }
+
+            // Theme initialization
+            this.currentTheme = localStorage.getItem('pledgly_theme') || 'light';
+
             this.updateDir();
+            this.updateTheme();
         },
 
         toggleLanguage(lang) {
             this.currentLang = lang;
             localStorage.setItem('pledgly_lang', lang);
             this.updateDir();
+        },
+
+        toggleTheme() {
+            this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('pledgly_theme', this.currentTheme);
+            this.updateTheme();
+        },
+
+        updateTheme() {
+            if (this.currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         },
 
         updateDir() {
