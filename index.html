@@ -598,6 +598,27 @@
                     x-text="t('footer.support')">Support</a>
             </div>
         </footer>
+        <!-- Cookie Consent -->
+        <div x-data="{ show: false }"
+            x-init="setTimeout(() => show = !localStorage.getItem('pledgly_cookie_consent'), 1000)" x-show="show"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-full"
+            x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-full"
+            class="fixed bottom-0 left-0 right-0 p-4 z-50 flex justify-center" style="display: none;">
+            <div
+                class="bg-[#030712]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 max-w-4xl w-full flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+                <p class="text-sm text-slate-300" x-text="t('contact.cookie_consent.text')">We use cookies to improve
+                    your experience. By using our site, you agree to our use of cookies.</p>
+                <div class="flex items-center gap-3 shrink-0">
+                    <button @click="localStorage.setItem('pledgly_cookie_consent', 'declined'); show = false"
+                        class="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors"
+                        x-text="t('contact.cookie_consent.decline')">Decline</button>
+                    <button @click="localStorage.setItem('pledgly_cookie_consent', 'accepted'); show = false"
+                        class="px-6 py-2 text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition-all shadow-lg shadow-indigo-600/20"
+                        x-text="t('contact.cookie_consent.accept')">Accept</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

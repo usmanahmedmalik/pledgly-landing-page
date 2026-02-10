@@ -174,7 +174,17 @@ const translations = {
             ar: "نحن نحترم خصوصيتك. المعلومات المقدمة من خلال هذا النموذج تستخدم فقط للرد على استفسيارتك ويتم التعامل معها وفقًا للوائح GDPR."
         },
         direct_contact: { en: "Or contact us directly:", nl: "Of neem direct contact met ons op:", de: "Oder kontaktieren Sie uns direkt:", ar: "أو اتصل بنا مباشرة:" },
-        hours: { en: "Monday-Friday, 9:00-17:00 CET", nl: "Maandag-Vrijdag, 9:00-17:00 CET", de: "Montag-Freitag, 9:00-17:00 MEZ", ar: "الأثنين-الجمعة، 9:00-17:00 بتوقيت وسط أوروبا" }
+        hours: { en: "Monday-Friday, 9:00-17:00 CET", nl: "Maandag-Vrijdag, 9:00-17:00 CET", de: "Montag-Freitag, 9:00-17:00 MEZ", ar: "الأثنين-الجمعة، 9:00-17:00 بتوقيت وسط أوروبا" },
+        cookie_consent: {
+            text: {
+                en: "We use cookies to improve your experience. By using our site, you agree to our use of cookies.",
+                nl: "We gebruiken cookies om uw ervaring te verbeteren. Door onze site te gebruiken, gaat u akkoord met ons gebruik van cookies.",
+                de: "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Durch die Nutzung unserer Website stimmen Sie unserer Verwendung von Cookies zu.",
+                ar: "نحن نستخدم ملفات تعريف الارتباط لتحسين تجربتك. باستخدام موقعنا، فإنك توافق على استخدامنا لملفات تعريف الارتباط."
+            },
+            accept: { en: "Accept", nl: "Accepteren", de: "Akzeptieren", ar: "قبول" },
+            decline: { en: "Decline", nl: "Afwijzen", de: "Ablehnen", ar: "رفض" }
+        }
     },
     footer: {
         rights: { en: "© 2026 Pledgly. All rights reserved.", nl: "© 2026 Pledgly. Alle rechten voorbehouden.", de: "© 2026 Pledgly. Alle Rechte vorbehalten.", ar: "© 2026 Pledgly. جميع الحقوق محفوظة." },
@@ -190,11 +200,16 @@ document.addEventListener('alpine:init', () => {
         translations: translations,
 
         init() {
+            const savedLang = localStorage.getItem('pledgly_lang');
+            if (savedLang && ['en', 'nl', 'de', 'ar'].includes(savedLang)) {
+                this.currentLang = savedLang;
+            }
             this.updateDir();
         },
 
         toggleLanguage(lang) {
             this.currentLang = lang;
+            localStorage.setItem('pledgly_lang', lang);
             this.updateDir();
         },
 
