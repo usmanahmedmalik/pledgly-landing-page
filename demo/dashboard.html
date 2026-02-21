@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Essalam Moskee Demo</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f4f7f5',
+                            100: '#e3ebe6',
+                            200: '#c5d9ce',
+                            300: '#9bbfae',
+                            400: '#6e9e8f',
+                            500: '#4d8374',
+                            600: '#3a665b',
+                            700: '#31524a',
+                            800: '#2a423d',
+                            900: '#243734',
+                        },
+                        gold: {
+                            100: '#fbf5e6',
+                            200: '#f5e6c3',
+                            300: '#ebd295',
+                            400: '#dfbc65',
+                            500: '#d4a742',
+                            600: '#b88934',
+                            700: '#94662d',
+                            800: '#7a522b',
+                        },
+                        dark: {
+                            bg: '#1a1c23',
+                            card: '#24262d',
+                            border: '#35373e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #d4a742 0%, #dfbc65 50%, #b88934 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-gradient {
+            border-image: linear-gradient(to right, transparent, #d4a742, transparent) 1;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans h-full flex flex-col transition-colors duration-300"
+    x-data="{ sidebarOpen: false, darkMode: localStorage.getItem('theme') === 'dark' }" :class="{ 'dark': darkMode }"
+    x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">
+
+    <!-- Top Navigation -->
+    <nav
+        class="bg-white dark:bg-dark-card border-b border-gray-200 dark:border-dark-border sticky top-0 z-30 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <button @click="sidebarOpen = !sidebarOpen"
+                        class="md:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div class="flex-shrink-0 flex items-center ml-4 md:ml-0 gap-3">
+                        <div
+                            class="h-10 w-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg border-2 border-gold-400">
+                            E
+                        </div>
+                        <span
+                            class="font-serif font-bold text-xl tracking-tight text-gray-900 dark:text-white hidden sm:block">Essalam
+                            <span class="text-primary-600 dark:text-primary-400">Moskee</span></span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button @click="darkMode = !darkMode"
+                        class="p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors focus:outline-none">
+                        <svg x-show="!darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                        <svg x-show="darkMode" x-cloak class="w-6 h-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- Profile Dropdown -->
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">
+                            <img class="h-9 w-9 rounded-full object-cover border-2 border-gold-400 shadow-sm"
+                                src="https://ui-avatars.com/api/?name=Admin+User&background=4d8374&color=fff"
+                                alt="Admin User">
+                            <span class="hidden md:block font-medium text-sm text-gray-700 dark:text-gray-200">Admin
+                                User</span>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div x-show="open" @click.away="open = false" x-transition.origin.top.right
+                            class="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-card rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Your
+                                Profile</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
+                            <a href="index.html"
+                                class="block px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700">Sign
+                                out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar -->
+        <aside :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}"
+            class="fixed inset-y-0 left-0 bg-white dark:bg-dark-card w-64 border-r border-gray-200 dark:border-dark-border transform md:translate-x-0 transition-transform duration-300 ease-in-out z-20 md:static md:block h-full">
+            <div class="h-full flex flex-col py-6 overflow-y-auto">
+                <div class="px-6 mb-8">
+                    <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-bold mb-4">
+                        Administration</p>
+                    <nav class="space-y-1">
+                        <a href="#"
+                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg bg-primary-50 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400 border-l-4 border-primary-600 transition-all shadow-sm">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                </path>
+                            </svg>
+                            Dashboard
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-border/50 hover:text-gray-900 dark:hover:text-white transition-all">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                            Members
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-border/50 hover:text-gray-900 dark:hover:text-white transition-all">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            Donations
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-border/50 hover:text-gray-900 dark:hover:text-white transition-all">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Settings
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="px-6 mb-8">
+                    <p class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-bold mb-4">Modules
+                    </p>
+                    <nav class="space-y-1">
+                        <a href="#"
+                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-border/50 hover:text-gray-900 dark:hover:text-white transition-all">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            </svg>
+                            Education
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-border/50 hover:text-gray-900 dark:hover:text-white transition-all">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z">
+                                </path>
+                            </svg>
+                            Announcements
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-dark-bg p-6 md:p-8">
+            <div class="max-w-7xl mx-auto space-y-8">
+
+                <!-- Welcome Section -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">Welcome back! Here's what's happening today,
+                            <span
+                                x-text="new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })"></span>.
+                        </p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <a href="#"
+                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            New Announcement
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Stat Card 1 -->
+                    <div
+                        class="bg-white dark:bg-dark-card rounded-xl shadow-lg border border-gray-100 dark:border-dark-border p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-primary-50 dark:bg-primary-900/10 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/20 transition-colors">
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                    Total Committed (2025)</h3>
+                                <div
+                                    class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white">€124,592.50</p>
+                            <p class="text-xs text-green-600 dark:text-green-400 mt-2 flex items-center font-medium">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                                +12.5% from last month
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card 2 -->
+                    <div
+                        class="bg-white dark:bg-dark-card rounded-xl shadow-lg border border-gray-100 dark:border-dark-border p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-green-50 dark:bg-green-900/10 group-hover:bg-green-100 dark:group-hover:bg-green-900/20 transition-colors">
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                    Total Received (2025)</h3>
+                                <div
+                                    class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600 dark:text-green-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white">€98,420.00</p>
+                            <p class="text-xs text-gray-500 mt-2 flex items-center">
+                                79% of committed amount
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card 3 -->
+                    <div
+                        class="bg-white dark:bg-dark-card rounded-xl shadow-lg border border-gray-100 dark:border-dark-border p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-gold-100 dark:bg-gold-500/10 group-hover:bg-gold-200 dark:group-hover:bg-gold-500/20 transition-colors">
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3
+                                    class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                    Active Donors</h3>
+                                <div
+                                    class="p-2 bg-gold-100 dark:bg-gold-500/20 rounded-lg text-gold-600 dark:text-gold-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="text-3xl font-bold text-gold-600 dark:text-gold-400">342</p>
+                            <p class="text-xs text-green-600 dark:text-green-400 mt-2 flex items-center font-medium">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                12 new this month
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div
+                    class="bg-white dark:bg-dark-card rounded-xl shadow-lg border border-gray-100 dark:border-dark-border p-6">
+                    <h3 class="text-lg font-serif font-bold text-gray-900 dark:text-white mb-6">Commitments vs Received
+                    </h3>
+                    <div class="h-80 w-full">
+                        <canvas id="donationsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions Table -->
+                <div
+                    class="bg-white dark:bg-dark-card rounded-xl shadow-lg border border-gray-100 dark:border-dark-border overflow-hidden">
+                    <div
+                        class="px-6 py-4 border-b border-gray-100 dark:border-dark-border flex justify-between items-center">
+                        <h3 class="text-lg font-serif font-bold text-gray-900 dark:text-white">Monthly Breakdown</h3>
+                        <button class="text-sm text-primary-600 hover:text-primary-700 font-medium">Export
+                            Report</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-dark-border">
+                            <thead class="bg-gray-50 dark:bg-dark-card/50">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                        Month</th>
+                                    <th
+                                        class="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                        Committed</th>
+                                    <th
+                                        class="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                        Received</th>
+                                    <th
+                                        class="px-6 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                        Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-dark-card divide-y divide-gray-200 dark:divide-dark-border">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                        January</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-600 dark:text-gray-300">
+                                        €10,200.00</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-white font-bold">
+                                        €9,850.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                            96%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                        February</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-600 dark:text-gray-300">
+                                        €10,500.00</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-white font-bold">
+                                        €10,120.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                            96%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                        March</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-600 dark:text-gray-300">
+                                        €11,000.00</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-white font-bold">
+                                        €8,500.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                            77%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                        April</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-600 dark:text-gray-300">
+                                        €9,800.00</td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900 dark:text-white font-bold">
+                                        €9,800.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                            100%
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Chart Initialization
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('donationsChart').getContext('2d');
+
+            // Modern gradient for the chart
+            let gradientCommitted = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientCommitted.addColorStop(0, 'rgba(59, 130, 246, 0.2)');
+            gradientCommitted.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+
+            let gradientReceived = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientReceived.addColorStop(0, 'rgba(77, 131, 116, 0.2)');
+            gradientReceived.addColorStop(1, 'rgba(77, 131, 116, 0.0)');
+
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Committed',
+                        data: [10200, 10500, 11000, 9800, 10100, 10300, 10400, 9900, 10200, 10600, 10800, 11000],
+                        borderColor: '#3b82f6',
+                        backgroundColor: gradientCommitted,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#3b82f6',
+                        pointHoverBackgroundColor: '#3b82f6',
+                        pointHoverBorderColor: '#fff',
+                    }, {
+                        label: 'Received',
+                        data: [9850, 10120, 8500, 9800, 9900, 10000, 10100, 9500, 9800, 10400, 10000, 10500],
+                        borderColor: '#4d8374',
+                        backgroundColor: gradientReceived,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#4d8374',
+                        pointHoverBackgroundColor: '#4d8374',
+                        pointHoverBorderColor: '#fff',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: 'Outfit'
+                                },
+                                usePointStyle: true,
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(26, 28, 35, 0.9)',
+                            titleFont: { family: 'Outfit', size: 13 },
+                            bodyFont: { family: 'Outfit', size: 12 },
+                            padding: 10,
+                            cornerRadius: 8,
+                            displayColors: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? '#35373e' : '#f3f4f6',
+                            },
+                            ticks: {
+                                font: { family: 'Outfit' },
+                                callback: function (value) { return '€' + value / 1000 + 'k'; }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: { family: 'Outfit' }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

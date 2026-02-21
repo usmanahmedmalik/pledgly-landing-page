@@ -181,7 +181,7 @@
                 </button>
 
                 <!-- Language Switcher -->
-                <div class="relative ml-1 pl-2 border-l border-slate-200 dark:border-white/10 transition-colors duration-300"
+                <div class="relative ms-1 ps-2 border-s border-slate-200 dark:border-white/10 transition-colors duration-300"
                     x-data="{ open: false }">
                     <button @click="open = !open" @click.outside="open = false"
                         class="flex items-center space-x-1 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors px-3 py-2">
@@ -203,6 +203,9 @@
                         <button @click="toggleLanguage('de'); open = false"
                             class="block w-full text-left px-4 py-2 text-sm hover:bg-white/5 transition-colors"
                             :class="currentLang === 'de' ? 'text-indigo-400 font-bold' : 'text-slate-400'">Deutsch</button>
+                        <button @click="toggleLanguage('fr'); open = false"
+                            class="block w-full text-left px-4 py-2 text-sm hover:bg-white/5 transition-colors"
+                            :class="currentLang === 'fr' ? 'text-indigo-400 font-bold' : 'text-slate-400'">Français</button>
                         <button @click="toggleLanguage('ar'); open = false"
                             class="block w-full text-left px-4 py-2 text-sm hover:bg-white/5 transition-colors"
                             :class="currentLang === 'ar' ? 'text-indigo-400 font-bold' : 'text-slate-400'">العربية</button>
@@ -212,127 +215,215 @@
         </nav>
 
         <!-- Hero Section -->
-        <main class="w-full max-w-5xl flex flex-col items-center text-center mt-20 md:mt-32">
-            <div
-                class="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-1.5 mb-8">
-                <span class="relative flex h-2 w-2">
-                    <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                </span>
-                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400"
-                    x-text="t('hero.trusted')">Trusted by Communities</span>
+        <main class="w-full max-w-5xl flex flex-col items-center text-center mt-12 md:mt-16">
+
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-8">
+                <div
+                    class="inline-flex items-center space-x-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full px-4 py-1.5">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+                    </span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-yellow-600 dark:text-yellow-400"
+                        x-text="t('hero.status_coming_soon')">Coming Soon</span>
+                </div>
+                <div class="hidden sm:block text-slate-300 dark:text-slate-700">•</div>
+                <div
+                    class="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-1.5">
+                    <span class="text-xs font-bold uppercase tracking-widest text-indigo-400"
+                        x-text="t('hero.trusted')">Empowering Mosques in Europe</span>
+                </div>
             </div>
 
             <h1 class="text-6xl md:text-8xl font-extrabold font-outfit leading-[1.1] mb-8">
-                <span x-text="t('hero.title_1')">Empowering Communities</span><br><span class="gradient-text"
-                    x-text="t('hero.title_2')">Through Modern Giving</span>
+                <span x-text="t('hero.title_1')">Focus on your community.</span><br><span class="gradient-text"
+                    x-text="t('hero.title_2')">We'll handle the admin.</span>
             </h1>
 
             <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mb-12 leading-relaxed"
                 x-text="t('hero.subtitle')">
-                A complete platform built for mosques and religious organizations to manage donations, engage members,
-                and strengthen community bonds.
+                Exclusively designed for mosques in the Netherlands, Belgium, and Germany. Streamline donations,
+                members, and education from one secure platform.
             </p>
 
             <div class="flex flex-col md:flex-row gap-4 items-center">
                 <a href="#contact" x-text="t('hero.demo')"
-                    class="bg-indigo-600 text-white font-bold px-8 py-4 rounded-xl hover:bg-indigo-500 transition-all whitespace-nowrap shadow-lg shadow-indigo-600/20">
+                    class="bg-indigo-600 text-white font-bold px-8 py-4 rounded-xl hover:bg-indigo-500 transition-all text-center shadow-lg shadow-indigo-600/20">
                     Schedule a Demo
                 </a>
                 <a href="#features" x-text="t('hero.how_it_works')"
-                    class="border border-slate-200 dark:border-white/10 glass text-slate-900 dark:text-white font-bold px-8 py-4 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all whitespace-nowrap">
+                    class="border border-slate-200 dark:border-white/10 glass text-slate-900 dark:text-white font-bold px-8 py-4 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all text-center">
                     See How It Works
                 </a>
             </div>
 
-            <div class="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-indigo-400 mb-1" x-text="t('hero.stats_data')">Your Data</div>
-                    <div class="text-sm text-slate-500" x-text="t('hero.stats_server')">Your Server</div>
+                    <div class="text-3xl font-bold text-indigo-400 mb-1" x-text="t('hero.stats_data')">EU</div>
+                    <div class="text-sm text-slate-500 font-medium tracking-wide uppercase"
+                        x-text="t('hero.stats_server')">Hosted</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-purple-400 mb-1">GDPR</div>
-                    <div class="text-sm text-slate-500" x-text="t('hero.stats_compliant')">Compliant</div>
+                    <div class="text-3xl font-bold text-purple-400 mb-1" x-text="t('compliance.gdpr_short')">GDPR</div>
+                    <div class="text-sm text-slate-500 font-medium tracking-wide uppercase"
+                        x-text="t('compliance.compliant_short')">Compliant</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-pink-400 mb-1" x-text="t('hero.stats_languages')">3 Languages
+                    <div class="text-3xl font-bold text-pink-400 mb-1" x-text="t('hero.stats_languages')">5 Languages
                     </div>
-                    <div class="text-sm text-slate-500" x-text="t('hero.stats_langs')">EN • NL • AR</div>
+                    <div class="text-sm text-slate-500 font-medium tracking-wide uppercase"
+                        x-text="t('hero.stats_langs')">EN • NL • DE • FR • AR</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-1">Stripe</div>
+                    <div class="text-sm text-slate-500 font-medium tracking-wide uppercase"
+                        x-text="t('compliance.payments')">Payments</div>
                 </div>
             </div>
         </main>
 
+        <!-- The Struggles Section -->
+        <section class="w-full max-w-7xl mt-48 mb-24 relative">
+            <div class="absolute inset-0 bg-indigo-50 dark:bg-indigo-900/10 rounded-[3rem] -z-10 transform -skew-y-2">
+            </div>
+            <div class="py-20 px-8 text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold font-outfit mb-6 text-slate-900 dark:text-white leading-tight"
+                    x-text="t('struggles.intro_title')">Running a mosque shouldn't mean drowning in admin</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 mb-16 leading-relaxed"
+                    x-text="t('struggles.intro_desc')">
+                    Most mosque boards are volunteers — imams, engineers, teachers — giving their evenings and weekends
+                    to keep the community running. They deserve better tools.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-6 text-start">
+                    <!-- Struggle 1 -->
+                    <div
+                        class="bg-white dark:bg-[#0f172a] p-8 rounded-3xl border border-red-100 dark:border-red-900/30 shadow-xl shadow-slate-200/50 dark:shadow-none hover:-translate-y-2 transition-transform duration-300">
+                        <div
+                            class="w-12 h-12 bg-red-100 dark:bg-red-900/40 text-red-500 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-slate-900 dark:text-white"
+                            x-text="t('struggles.card1_title')">Donation tracking in Excel</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed"
+                            x-text="t('struggles.card1_desc')">Multiple volunteers updating different spreadsheets. No
+                            one knows the real total. Ramadan ends and reconciliation takes weeks.</p>
+                    </div>
+
+                    <!-- Struggle 2 -->
+                    <div
+                        class="bg-white dark:bg-[#0f172a] p-8 rounded-3xl border border-orange-100 dark:border-orange-900/30 shadow-xl shadow-slate-200/50 dark:shadow-none hover:-translate-y-2 transition-transform duration-300">
+                        <div
+                            class="w-12 h-12 bg-orange-100 dark:bg-orange-900/40 text-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-slate-900 dark:text-white"
+                            x-text="t('struggles.card2_title')">WhatsApp groups doing everything</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed"
+                            x-text="t('struggles.card2_desc')">Announcements, payment confirmations, course schedules —
+                            all buried in 300 messages. Volunteers burn out managing it.</p>
+                    </div>
+
+                    <!-- Struggle 3 -->
+                    <div
+                        class="bg-white dark:bg-[#0f172a] p-8 rounded-3xl border border-yellow-100 dark:border-yellow-900/30 shadow-xl shadow-slate-200/50 dark:shadow-none hover:-translate-y-2 transition-transform duration-300">
+                        <div
+                            class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-500 rounded-2xl flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-slate-900 dark:text-white"
+                            x-text="t('struggles.card3_title')">Quran school on paper registers</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed"
+                            x-text="t('struggles.card3_desc')">Student lists, attendance, homework — manually
+                            maintained. Parents have no visibility. Teachers have no tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Features Section -->
-        <section id="features" class="w-full max-w-7xl mt-48 mb-32">
+        <section id="features" class="w-full max-w-7xl mb-32">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-outfit mb-4" x-text="t('features.title')">Everything You
-                    Need to Manage Your Community
+                    Need to Manage Your Mosque
                 </h2>
                 <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" x-text="t('features.subtitle')">
-                    Streamline donations,
-                    courses, and community engagement with
-                    purpose-built tools for faith-based organizations.</p>
+                    Streamline donations, courses, and community engagement with purpose-built tools.
+                </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Donation Management -->
                 <div
-                    class="glass p-8 rounded-3xl group hover:border-indigo-500/50 transition-all border-l-4 border-l-indigo-500">
+                    class="glass p-8 rounded-3xl group hover:border-indigo-500/50 transition-all border-s-4 border-s-indigo-500">
                     <div
                         class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" x-text="t('features.donation_title')">Donation Management</h3>
+                    <h3 class="text-xl font-bold mb-3" x-text="t('features.donation_title')">Annual Pledge Management
+                    </h3>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
-                        x-text="t('features.donation_desc')">Track annual
-                        pledges, process one-time donations,
-                        and set up recurring contributions with secure Stripe integration. Members get personal
-                        dashboards to manage everything.</p>
+                        x-text="t('features.donation_desc')">Members commit to a yearly amount and pay in installments.
+                        Pledgly tracks who's paid and sends gentle reminders — no awkward conversations needed.</p>
                 </div>
 
-                <!-- Seasonal Campaigns -->
+                <!-- Online & Recurring Donations -->
                 <div
-                    class="glass p-8 rounded-3xl group hover:border-purple-500/50 transition-all border-l-4 border-l-purple-500">
+                    class="glass p-8 rounded-3xl group hover:border-purple-500/50 transition-all border-s-4 border-s-purple-500">
                     <div
                         class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
+                            </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" x-text="t('features.campaigns_title')">Seasonal Campaigns</h3>
+                    <h3 class="text-xl font-bold mb-3" x-text="t('features.campaigns_title')">Online & Recurring
+                        Donations</h3>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
-                        x-text="t('features.campaigns_desc')">Run focused
-                        fundraising campaigns like Ramadan
-                        with real-time goal tracking, daily progress updates, and visual dashboards that inspire
-                        community participation.</p>
+                        x-text="t('features.campaigns_desc')">Secure Stripe-powered payments. Members give once or set
+                        up a monthly contribution. Every transaction is logged automatically — no manual reconciliation.
+                    </p>
                 </div>
 
-                <!-- Educational Programs -->
+                <!-- Quran School -->
                 <div
-                    class="glass p-8 rounded-3xl group hover:border-pink-500/50 transition-all border-l-4 border-l-pink-500">
+                    class="glass p-8 rounded-3xl group hover:border-pink-500/50 transition-all border-s-4 border-s-pink-500">
                     <div
                         class="w-12 h-12 bg-pink-600/20 text-pink-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z">
+                            </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" x-text="t('features.edu_title')">Educational Programs</h3>
+                    <h3 class="text-xl font-bold mb-3" x-text="t('features.edu_title')">Quran School & Education</h3>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
-                        x-text="t('features.edu_desc')">Manage courses,
-                        class sessions, and student
-                        enrollment. Teachers can share materials, assign homework, and track progress from their portal.
-                    </p>
+                        x-text="t('features.edu_desc')">Manage class schedules, student enrollment, teacher portals,
+                        attendance, and homework. Parents log in to check progress.</p>
                 </div>
 
                 <!-- Member Portal -->
                 <div
-                    class="glass p-8 rounded-3xl group hover:border-blue-500/50 transition-all border-l-4 border-l-blue-500">
+                    class="glass p-8 rounded-3xl group hover:border-blue-500/50 transition-all border-s-4 border-s-blue-500 lg:col-span-1 md:col-span-2">
                     <div
                         class="w-12 h-12 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -340,17 +431,16 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" x-text="t('features.portal_title')">Member Portal</h3>
+                    <h3 class="text-xl font-bold mb-3" x-text="t('features.portal_title')">Member Self-Service Portal
+                    </h3>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
-                        x-text="t('features.portal_desc')">Each member
-                        gets their own secure dashboard to
-                        manage pledges, view donation history, enroll in courses, and stay connected with community
-                        activities.</p>
+                        x-text="t('features.portal_desc')">Every member gets their own login to see pledge history, make
+                        payments, enroll in courses, and update info — reducing admin requests.</p>
                 </div>
 
-                <!-- Administrative Control -->
+                <!-- Administrative Dashboard -->
                 <div
-                    class="glass p-8 rounded-3xl group hover:border-orange-500/50 transition-all border-l-4 border-l-orange-500">
+                    class="glass p-8 rounded-3xl group hover:border-orange-500/50 transition-all border-s-4 border-s-orange-500 lg:col-span-2 md:col-span-2">
                     <div
                         class="w-12 h-12 bg-orange-600/20 text-orange-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -358,31 +448,12 @@
                                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" x-text="t('features.admin_title')">Administrative Control</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
-                        x-text="t('features.admin_desc')">Comprehensive
-                        admin tools to monitor commitments,
-                        track payments, manage member roles, and configure system settings—all from one central
-                        location.</p>
+                    <h3 class="text-xl font-bold mb-3" x-text="t('features.admin_title')">Admin Dashboard & Reports</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-xl"
+                        x-text="t('features.admin_desc')">A complete overview of your mosque's finances, membership, and
+                        programs. Export reports for your annual general meeting in minutes.</p>
                 </div>
 
-                <!-- Community Engagement -->
-                <div
-                    class="glass p-8 rounded-3xl group hover:border-green-500/50 transition-all border-l-4 border-l-green-500">
-                    <div
-                        class="w-12 h-12 bg-green-600/20 text-green-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3" x-text="t('features.community_title')">Community Engagement</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
-                        x-text="t('features.community_desc')">Built-in
-                        tools for raffles, events, and
-                        public-facing pages where visitors can contact you and parents can register children for
-                        programs.</p>
-                </div>
             </div>
         </section>
 
@@ -397,8 +468,7 @@
                     </h2>
                     <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed" x-text="t('compliance.desc')">
                         Fully compliant with European data protection regulations, with dedicated databases and EU-based
-                        hosting. Your data is never mixed with other organizations, providing maximum security and
-                        privacy.
+                        hosting. Your data is never mixed with other organizations.
                     </p>
                     <ul class="space-y-4">
                         <li class="flex items-center space-x-3">
@@ -417,7 +487,7 @@
                                     <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <span x-text="t('compliance.nav_db')">Dedicated Database Per Organization</span>
+                            <span x-text="t('compliance.nav_db')">Separate Database Per Mosque</span>
                         </li>
                         <li class="flex items-center space-x-3">
                             <div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center">
@@ -426,8 +496,7 @@
                                     <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <span x-text="t('compliance.stripe')">Secure Stripe Payment Processing (PCI
-                                Compliant)</span>
+                            <span x-text="t('compliance.stripe')">Secure Stripe Payments</span>
                         </li>
                         <li class="flex items-center space-x-3">
                             <div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center">
@@ -436,7 +505,7 @@
                                     <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <span x-text="t('compliance.security')">Regular Security Updates & Monitoring</span>
+                            <span x-text="t('compliance.security')">Security as Top Priority</span>
                         </li>
                     </ul>
                 </div>
@@ -444,25 +513,26 @@
                     <div
                         class="p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-center">
                         <div class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tighter">EU</div>
-                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest"
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest break-words"
                             x-text="t('compliance.residency')">Data Residency</div>
                     </div>
                     <div
                         class="p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-center">
-                        <div class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tighter">GDPR</div>
-                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest"
-                            x-text="t('hero.stats_compliant')">Compliant</div>
+                        <div class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tighter"
+                            x-text="t('compliance.gdpr_short')">GDPR</div>
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest break-words"
+                            x-text="t('compliance.compliant_short')">Compliant</div>
                     </div>
                     <div
                         class="p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-center">
                         <div class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tighter">SSL</div>
-                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest"
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest break-words"
                             x-text="t('compliance.encrypted')">Encrypted</div>
                     </div>
                     <div
                         class="p-6 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-center">
                         <div class="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tighter">PCI</div>
-                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest"
+                        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-widest break-words"
                             x-text="t('compliance.payments')">Payments</div>
                     </div>
                 </div>
@@ -472,54 +542,52 @@
         <!-- How It Works -->
         <section class="w-full max-w-7xl mb-32">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-outfit mb-4" x-text="t('how_it_works.title')">From Setup
-                    to Success in Days</h2>
+                <h2 class="text-4xl md:text-5xl font-bold font-outfit mb-4" x-text="t('how_it_works.title')">Getting
+                    started</h2>
                 <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" x-text="t('how_it_works.subtitle')">
-                    Simple, straightforward
-                    process to get your community
-                    platform up and running.</p>
+                    From first call to live in days. We handle the setup. Your board gets trained.</p>
             </div>
 
             <div class="grid md:grid-cols-5 gap-6">
-                <div class="text-center">
+                <div class="text-center relative">
                     <div
                         class="w-16 h-16 bg-indigo-600/20 text-indigo-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                         1</div>
-                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step1_title')">Consultation</h3>
-                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step1_desc')">We discuss your needs and
-                        show you how Pledgly works</p>
+                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step1_title')">Introduction call</h3>
+                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step1_desc')">We learn about your mosque —
+                        size, programs, current donation management</p>
                 </div>
                 <div class="text-center">
                     <div
                         class="w-16 h-16 bg-purple-600/20 text-purple-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                         2</div>
-                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step2_title')">Customization</h3>
-                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step2_desc')">We configure with your
-                        branding and import your data</p>
+                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step2_title')">We configure it</h3>
+                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step2_desc')">Branding, language
+                        preferences, member data imported. We do the heavy lifting.</p>
                 </div>
                 <div class="text-center">
                     <div
                         class="w-16 h-16 bg-pink-600/20 text-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                         3</div>
                     <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step3_title')">Training</h3>
-                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step3_desc')">We train your team with
-                        comprehensive documentation</p>
+                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step3_desc')">Hands-on session with board
+                        and staff. Documentation in your language.</p>
                 </div>
                 <div class="text-center">
                     <div
                         class="w-16 h-16 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                         4</div>
-                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step4_title')">Launch</h3>
-                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step4_desc')">Go live with full support
-                        for your community</p>
+                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step4_title')">Go live</h3>
+                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step4_desc')">Your mosque on your domain.
+                        Members log in & donate from day one.</p>
                 </div>
                 <div class="text-center">
                     <div
                         class="w-16 h-16 bg-green-600/20 text-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                         5</div>
-                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step5_title')">Support</h3>
-                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step5_desc')">Regular updates and
-                        responsive ongoing support</p>
+                    <h3 class="text-lg font-bold mb-2" x-text="t('how_it_works.step5_title')">Ongoing support</h3>
+                    <p class="text-sm text-slate-400" x-text="t('how_it_works.step5_desc')">We're reachable. Regular
+                        updates, no hidden charges, no surprises.</p>
                 </div>
             </div>
         </section>
@@ -537,12 +605,11 @@
                 management straightforward.
             </p>
             <p class="text-xl text-slate-700 dark:text-slate-300 italic mb-8 max-w-2xl" x-text="t('about.quote')">
-                "We build features based on real community needs, not trends. Every function in Pledgly solves an actual
-                problem faced by mosques and religious organizations."
+                "We build features based on real community needs, not trends."
             </p>
             <div class="flex items-center space-x-3 text-slate-500">
                 <span class="w-8 h-[1px] bg-slate-300 dark:bg-slate-800"></span>
-                <span>The Pledgly Team</span>
+                <span x-text="t('about.team')">The Pledgly Team</span>
                 <span class="w-8 h-[1px] bg-slate-300 dark:bg-slate-800"></span>
             </div>
         </section>
@@ -553,9 +620,7 @@
                 <h2 class="text-4xl md:text-5xl font-bold font-outfit mb-4" x-text="t('contact.title')">Let's Start a
                     Conversation</h2>
                 <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" x-text="t('contact.subtitle')">Whether
-                    you have questions,
-                    want to schedule a demo, or are
-                    ready to bring Pledgly to your community, we're here to help.</p>
+                    you have questions, want to schedule a demo, we're here to help.</p>
             </div>
 
             <div class="glass p-8 md:p-12 rounded-3xl">
@@ -567,7 +632,7 @@
                                 class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none text-slate-900 dark:text-white focus:border-indigo-500 dark:focus:border-indigo-500/50 transition-all">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium mb-2" x-text="t('contact.org')">Organization Name
+                            <label class="block text-sm font-medium mb-2" x-text="t('contact.org')">Mosque Name
                                 *</label>
                             <input type="text" required
                                 class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none text-slate-900 dark:text-white focus:border-indigo-500 dark:focus:border-indigo-500/50 transition-all">
@@ -627,9 +692,11 @@
                             Language for Response</label>
                         <select
                             class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 outline-none text-slate-900 dark:text-white focus:border-indigo-500 dark:focus:border-indigo-500/50 transition-all">
-                            <option>English</option>
-                            <option>Nederlands</option>
-                            <option>العربية (Arabic)</option>
+                            <option x-text="t('contact.langs.opt_en')">English</option>
+                            <option x-text="t('contact.langs.opt_nl')">Nederlands</option>
+                            <option x-text="t('contact.langs.opt_de')">Deutsch</option>
+                            <option x-text="t('contact.langs.opt_fr')">Français</option>
+                            <option x-text="t('contact.langs.opt_ar')">العربية (Arabic)</option>
                         </select>
                     </div>
 
@@ -654,8 +721,8 @@
             </div>
 
             <p class="text-xs text-slate-500 text-center mt-8 max-w-2xl mx-auto" x-text="t('contact.privacy')">
-                We respect your privacy. Information submitted through this form is used solely to respond to your
-                inquiry and is handled in accordance with GDPR regulations.
+                We respect your privacy. Information submitted through this form is handled in accordance with GDPR
+                regulations.
             </p>
         </section>
 

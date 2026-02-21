@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Essalam Moskee Demo</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f4f7f5',
+                            100: '#e3ebe6',
+                            200: '#c5d9ce',
+                            300: '#9bbfae',
+                            400: '#6e9e8f',
+                            500: '#4d8374',
+                            600: '#3a665b',
+                            700: '#31524a',
+                            800: '#2a423d',
+                            900: '#243734',
+                        },
+                        gold: {
+                            100: '#fbf5e6',
+                            200: '#f5e6c3',
+                            300: '#ebd295',
+                            400: '#dfbc65',
+                            500: '#d4a742',
+                            600: '#b88934',
+                            700: '#94662d',
+                            800: '#7a522b',
+                        },
+                        dark: {
+                            bg: '#1a1c23',
+                            card: '#24262d',
+                            border: '#35373e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'pattern': "url('https://www.transparenttextures.com/patterns/arabesque.png')"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .mosque-pattern {
+            background-color: #4d8374;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233a665b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-dark-bg transition-colors duration-300 h-full flex items-center justify-center p-4"
+    x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }" :class="{ 'dark': darkMode }"
+    x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">
+
+    <!-- Theme Toggle (Absolute Top Right) -->
+    <div class="absolute top-4 right-4">
+        <button @click="darkMode = !darkMode"
+            class="p-2 rounded-full bg-white dark:bg-dark-card shadow-md text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors focus:outline-none">
+            <svg x-show="!darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            <svg x-show="darkMode" x-cloak style="display: none;" class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Login Card -->
+    <div
+        class="w-full max-w-md bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row md:max-w-4xl">
+
+        <!-- Left Side: Image/Branding (Visible on md+) -->
+        <div
+            class="hidden md:flex md:w-1/2 mosque-pattern p-12 flex-col justify-between text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-900/50 to-primary-500/50"></div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-8">
+                    <div
+                        class="h-10 w-10 bg-white rounded-full flex items-center justify-center text-primary-700 font-serif font-bold text-xl shadow-lg border-2 border-gold-400">
+                        E
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-tight">Essalam Moskee</span>
+                </div>
+                <h2 class="text-4xl font-serif font-bold leading-tight mb-4">Welcome Back</h2>
+                <p class="text-primary-100 text-lg">Manage your mosque's donations, members, and announcements with ease
+                    and elegance.</p>
+            </div>
+            <div class="relative z-10 text-sm text-primary-200">
+                &copy; 2025 Essalam Moskee. All rights reserved.
+            </div>
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="w-full md:w-1/2 p-8 md:p-12 relative">
+            <!-- Mobile Logo (Visible on sm) -->
+            <div class="md:hidden flex justify-center mb-8">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="h-10 w-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg border-2 border-gold-400">
+                        E
+                    </div>
+                    <span class="font-serif font-bold text-xl tracking-tight text-gray-900 dark:text-white">Essalam
+                        Moskee</span>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sign into your account</h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-8">Enter your details to access the dashboard.</p>
+
+            <form action="dashboard.html" method="GET">
+                <div class="space-y-5">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email
+                            address</label>
+                        <input type="email" id="email" name="email" value="admin@example.com"
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-dark-bg dark:text-white transition-colors"
+                            placeholder="you@example.com" required>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label for="password"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                            <a href="#"
+                                class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400">Forgot
+                                password?</a>
+                        </div>
+                        <input type="password" id="password" name="password" value="password"
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-dark-border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-dark-bg dark:text-white transition-colors"
+                            placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all transform hover:scale-[1.02]">
+                        Sign in
+                    </button>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Don't have an account? <a href="#"
+                            class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400">Contact
+                            admin</a>
+                    </p>
+                </div>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-gray-100 dark:border-dark-border text-center">
+                <p class="text-xs text-gray-400">Demo Credentials: admin@example.com / password</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
